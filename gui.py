@@ -4,7 +4,20 @@ from time import sleep
 import checktime
 
 class GUI:
+    """
+    A class representing details for a GUI object.
+    """
     def __init__(self, window):
+        """
+        Contructor to create initial state of a GUI object.
+        :param window: Window of GUI.
+        :param dclock: Digital clock display.
+        :param hrs: Time in hours.
+        :param mins: Time in minutes.
+        :param ampm: Period of the day.
+        :param menu: AM/PM selection menu.
+        :param setbutton: Button to set alarm.
+        """
         self.window = window
         
         self.dclock = Label(window, font = ('Arial', 50), background = 'black', foreground = '#0080ff')
@@ -37,11 +50,21 @@ class GUI:
         self.time()
         
     def time(self):
+        """
+        Method used to change the displayed time on the digital clock.
+        :param dclock: Digital clock display.
+        """
         string = strftime('%I:%M:%S %p')
         self.dclock.config(text = string)
         self.dclock.after(1000, self.time)
         self.dclock.after(1000, checktime.checktime)
     def setalarm(self):
+        """
+        Method used to use user input to set the alarm.
+        :param alarm_hrs: The alarm in hours.
+        :param alarm_mins: The alarm in minutes.
+        :param alarm_ampm: The period of the alarm.
+        """
         if self.entry_mins.get() != '' and self.entry_hrs.get() != '':
             try:
                 if 1 <= int(self.entry_hrs.get()) <= 12 and 0 <= int(self.entry_mins.get()) <= 59:
